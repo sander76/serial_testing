@@ -30,7 +30,7 @@ class Test():
 
         self.move=0
         self.increase=10
-        for i in range(5):
+        for i in range(20):
             if self.move==90:
                 self.increase=-10
             elif self.move==10:
@@ -38,14 +38,16 @@ class Test():
             self.move+=self.increase
             for node in self.rq_set.nodes:
                 self.ser.write(node.get_move(self.move))
-            time.sleep(5)
+            time.sleep(50)
 
         # wait for all feedback to arrive.
-        time.sleep(30)
+        time.sleep(40)
         self.alive=False
-        for itm in self.rq_set.log_list:
-            st = ",".join((str(x,encoding='ascii').ljust(10) for x in itm[1]))
-            lgr.debug(st)
+        with open("log_result.txt",'w') as fl:
+            for itm in self.rq_set.log_list:
+                st = ",".join((str(x,encoding='ascii').ljust(10) for x in itm[1]))
+                lgr.debug(st)
+                fl.write(st+"\n")
         lgr.debug("closing connection")
         self.ser.close()
         self.t.join()
