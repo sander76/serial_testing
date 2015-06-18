@@ -32,7 +32,7 @@ class rqSet():
         return node
 
     def save_json(self):
-        with open("c://data/aptana/serial_testing/nodes.json","w") as fl:
+        with open("nodes.json","w") as fl:
             json.dump(self.nodes,fl,default=rqBaseNode.to_json)
 
     def from_json(self,file_path):
